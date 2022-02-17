@@ -6,7 +6,7 @@
 /*   By: sujpark <sujpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 16:51:24 by sujpark           #+#    #+#             */
-/*   Updated: 2022/02/17 16:40:39 by sujpark          ###   ########.fr       */
+/*   Updated: 2022/02/17 17:06:07 by sujpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	free_ptr(char **ptr)
 {
 	free(*ptr);
-	*ptr = NULL;
+	*ptr = NULL; //?
 }
 
 static char	*extract_line(char **buffer_backup)
@@ -34,18 +34,18 @@ static char	*extract_line(char **buffer_backup)
 	return (line);
 }
 
-static int	read_file(int fd, char **buffer, char **buffer_backup) //backup 에 \n 없는 상태
+static int	read_file(int fd, char **buffer, char **buffer_backup)
 {
 	int		bytes_read;
 	char	*temp_free;
 
 	bytes_read = 1;
-	while (!ft_strchr(*buffer_backup, '\n') && bytes_read) //backup에 \n 들어가거나 \0 까지 온게 아닌 이상 계속 돌아감
+	while (!ft_strchr(*buffer_backup, '\n') && bytes_read)
 	{
 		bytes_read = read(fd, *buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
 			return (bytes_read);
-		(*buffer)[bytes_read] = '\0'; //buffer 마지막에 \0 저장
+		(*buffer)[bytes_read] = '\0';
 		temp_free = *buffer_backup;
 		*buffer_backup = ft_strjoin(temp_free, *buffer);
 		free_ptr(&temp_free);
@@ -58,8 +58,6 @@ static char	*get_line(int fd, char **buffer, char **buffer_backup)
 	int		bytes_read;
 	char	*temp_free;
 
-	if (ft_strchr(*buffer_backup, '\n'))
-		return (extract_line(buffer_backup));
 	bytes_read = read_file(fd, buffer, buffer_backup);
 	if (!**buffer_backup || bytes_read == -1)
 	{

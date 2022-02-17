@@ -6,7 +6,7 @@
 /*   By: sujpark <sujpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 16:50:20 by sujpark           #+#    #+#             */
-/*   Updated: 2022/02/04 16:22:24 by sujpark          ###   ########.fr       */
+/*   Updated: 2022/02/17 16:53:51 by sujpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <limits.h>
 
 # ifndef OPEN_MAX
-#  define OPEN_MAX 256
+#  define OPEN_MAX 10240
 # endif
 
 # ifndef BUFFER_SIZE
