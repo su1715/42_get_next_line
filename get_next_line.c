@@ -6,7 +6,7 @@
 /*   By: sujpark <sujpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 16:51:24 by sujpark           #+#    #+#             */
-/*   Updated: 2022/02/17 16:31:45 by sujpark          ###   ########.fr       */
+/*   Updated: 2022/02/17 16:33:46 by sujpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ static char	*get_line(int fd, char **buffer, char **buffer_backup)
 	if (ft_strchr(*buffer_backup, '\n'))
 		return (extract_line(buffer_backup));
 	bytes_read = read_file(fd, buffer, buffer_backup); // buffer_backup에 \n 저장된경우, buffer 가 \0 까지 읽은 경우, read 에러인 경우
-	if (!**buffer_backup && (bytes_read == 0 || bytes_read == -1)) //(buffer가 \0까지 읽은 경우 + read 에러) && backup에 아무것도 저장 안된 경우
-	// buffer_backup이 \0이면 bytes_read는 당연히 0 아님? == 아님
+	if (!**buffer_backup || bytes_read == -1) //read 에러 || backup에 아무것도 저장 안된 경우
+	// buffer_backup이 \0이면 bytes_read는 당연히 0 아님? 맞는거같음
 	{
 		free_ptr(buffer_backup);
 		return (NULL);
