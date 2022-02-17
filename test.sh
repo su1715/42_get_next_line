@@ -6,7 +6,7 @@ echo -e "\033[32;1m"gnlTester"\033[m"
 read $a
 git clone https://github.com/Tripouille/gnlTester.git
 cd gnlTester/
-make m
+make a
 cd ..
 rm -rf gnlTester/
 echo -e "\033[32;1m"DONE"\033[m"
