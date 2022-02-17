@@ -6,7 +6,7 @@
 /*   By: sujpark <sujpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 16:51:24 by sujpark           #+#    #+#             */
-/*   Updated: 2022/02/17 16:33:46 by sujpark          ###   ########.fr       */
+/*   Updated: 2022/02/17 16:40:39 by sujpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	read_file(int fd, char **buffer, char **buffer_backup) //backup 에 \
 		*buffer_backup = ft_strjoin(temp_free, *buffer);
 		free_ptr(&temp_free);
 	}
-	return (bytes_read); // \n 들어가거나 \0 까지 온 경우 .... 맨 마지막에 읽은 값? => -1 이거나 0 인 경우 식별하기 위해서
+	return (bytes_read);
 }
 
 static char	*get_line(int fd, char **buffer, char **buffer_backup)
@@ -60,22 +60,17 @@ static char	*get_line(int fd, char **buffer, char **buffer_backup)
 
 	if (ft_strchr(*buffer_backup, '\n'))
 		return (extract_line(buffer_backup));
-	bytes_read = read_file(fd, buffer, buffer_backup); // buffer_backup에 \n 저장된경우, buffer 가 \0 까지 읽은 경우, read 에러인 경우
-	if (!**buffer_backup || bytes_read == -1) //read 에러 || backup에 아무것도 저장 안된 경우
-	// buffer_backup이 \0이면 bytes_read는 당연히 0 아님? 맞는거같음
+	bytes_read = read_file(fd, buffer, buffer_backup);
+	if (!**buffer_backup || bytes_read == -1)
 	{
 		free_ptr(buffer_backup);
 		return (NULL);
 	}
-	if (ft_strchr(*buffer_backup, '\n')) // backup에 \n 있는 경우
+	if (ft_strchr(*buffer_backup, '\n'))
 		return (extract_line(buffer_backup));
-	if (!ft_strchr(*buffer_backup, '\n') && **buffer_backup) // \0 까지 읽었는데 backup에 남아있는 경우
-	{
-		temp_free = ft_strdup(*buffer_backup);
-		free_ptr(buffer_backup);
-		return (temp_free);
-	}
-	return (NULL); //?
+	temp_free = ft_strdup(*buffer_backup);
+	free_ptr(buffer_backup);
+	return (temp_free);
 }
 
 char	*get_next_line(int fd)
