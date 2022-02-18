@@ -6,11 +6,11 @@
 /*   By: sujpark <sujpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 19:44:07 by sujpark           #+#    #+#             */
-/*   Updated: 2022/02/17 19:44:08 by sujpark          ###   ########.fr       */
+/*   Updated: 2022/02/18 15:39:04 by sujpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
